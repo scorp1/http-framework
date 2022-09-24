@@ -4,7 +4,7 @@ services:
     build:
       context: docker/nginx
     ports:
-      - "8080:8080"
+      - "1010:8080"
     volumes:
       - ./:/app
     depends_on:
@@ -14,10 +14,18 @@ services:
     build:
       context: docker/php-fpm
     volumes:
-      - ./:/app
+      - ~/repositories/site-main-git/:/app/public
 
   php-cli:
     build:
       context: docker/php-cli
+    volumes:
+      - ./:/app
+
+  php-memcached:
+    build:
+      context: docker/php-memcached
+    ports:
+      - "9000:9000"
     volumes:
       - ./:/app
